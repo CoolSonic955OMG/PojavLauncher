@@ -22,7 +22,9 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
-before_install:  
+before_install:
+  - openssl aes-256-cbc -K $encrypted_2330f03d7182_key -iv $encrypted_2330f03d7182_iv -in archive.tar.gz.enc -out archive.tar.gz -d
+  - tar -xzvf archive.tar.gz
   - yes | sdkmanager "platforms;android-26"
   - yes | sdkmanager "build-tools;26.0.0"
   - yes | sdkmanager "platforms;android-28"
@@ -39,8 +41,6 @@ cache:
   - $HOME/.android/build-cache
 
 before_script:
-  - openssl aes-256-cbc -K $encrypted_2330f03d7182_key -iv $encrypted_2330f03d7182_iv -in archive.tar.gz.enc -out archive.tar.gz -d
-  - tar -xzvf archive.tar.gz
   - chmod +x gradlew
 
 script:
